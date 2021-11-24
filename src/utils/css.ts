@@ -1,4 +1,5 @@
 export function insertCSS(): void {
+
   const style = `
       h3.gs_rt{
         font-size: 14px;
@@ -7,5 +8,7 @@ export function insertCSS(): void {
         font-size: 18px
       }
     `;
+
   GM_addStyle(style);
+
 }
