@@ -1,6 +1,6 @@
 {
   "name": "gscholar-title-translator",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Translate your Google Scholar search result's title to the language you selected.",
   "main": "userscript/index.js",
   "scripts": {
@@ -13,6 +13,10 @@
     "traslate"
   ],
   "author": "pboymt",
+  "repository": {
+    "type": "git",
+    "url": "githttps://github.com/pboymt/gscholar-title-translator.git"
+  },
   "license": "GPL-3.0",
   "dependencies": {
     "axios": "^0.24.0"

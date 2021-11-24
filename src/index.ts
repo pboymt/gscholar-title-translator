@@ -1,18 +1,7 @@
+import { insertCSS } from "./utils/css";
 import { translate_youdao_next } from "./translators/youdao";
 
-function insertCSS() {
-    const style = `
-      h3.gs_rt{
-        font-size: 14px;
-      }
-      h3.gtitle_translated{
-        font-size: 18px
-      }
-    `;
-    GM_addStyle(style);
-}
-
-async function main() {
+async function main(): Promise<void> {
     insertCSS();
     const list = document.querySelectorAll('h3.gs_rt');
     for (let i = 0; i < list.length; i++) {
