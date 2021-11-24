@@ -1,10 +1,12 @@
 // ==UserScript==
 // @name 谷歌学术标题翻译
 // @namespace http://tampermonkey.net/
-// @version 0.2.2
+// @version 0.2.3
 // @description 将谷歌学术搜索结果中的标题翻译为中文
 // @author pboymt
-// @match http*://scholar.google.com/scholar*
+// @match https://scholar.google.com/scholar*
+// @match https://scholar.google.com.hk/scholar*
+// @match https://scholar.ustc.cf/scholar*
 // @require https://cdn.jsdelivr.net/npm/axios@0.24.0
 // @connect youdao.com
 // @grant GM_xmlhttpRequest
