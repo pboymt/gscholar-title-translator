@@ -23,8 +23,7 @@ const config: Configuration = {
         ]
     },
     externals: {
-        axios: 'axios',
-        'axios-userscript-adapter': 'axiosGmxhrAdapter'
+        axios: 'axios'
     },
     optimization: {
         minimize: false,

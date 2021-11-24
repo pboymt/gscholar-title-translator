@@ -38,9 +38,7 @@
     "connect": [
       "youdao.com"
     ],
-    "require": [
-      "https://cdn.jsdelivr.net/npm/axios-userscript-adapter@~0.1.8/dist/axiosGmxhrAdapter.min.js"
-    ],
+    "require": [],
     "grant": [
       "GM_xmlhttpRequest",
       "GM_addStyle",
