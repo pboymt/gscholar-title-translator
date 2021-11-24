@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name 谷歌学术标题翻译
 // @namespace http://tampermonkey.net/
-// @version 0.2.1
+// @version 0.2.2
 // @description 将谷歌学术搜索结果中的标题翻译为中文
 // @author pboymt
 // @match http*://scholar.google.com/scholar*

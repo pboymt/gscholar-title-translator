@@ -1,6 +1,6 @@
 {
   "name": "gscholar-title-translator",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Translate your Google Scholar search result's title to the language you selected.",
   "main": "userscript/index.js",
   "scripts": {
