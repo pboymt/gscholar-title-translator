@@ -28,6 +28,14 @@
 
 安装好Tampermonkey后，进入[Greasy Fork](https://greasyfork.org/zh-CN/scripts/435997-%E8%B0%B7%E6%AD%8C%E5%AD%A6%E6%9C%AF%E6%A0%87%E9%A2%98%E7%BF%BB%E8%AF%91)，点击“安装”即可使用。
 
+## 支持的站点（镜像）
+
+脚本除了支持[谷歌学术](https://scholar.google.com)的搜索结果页面，还支持以下镜像站点的搜索结果页面：
+
+- [USTC](https://scholar.ustc.cf)
+
+> 如果有更多镜像站点需要支持，请提交[issue](https://github.com/pboymt/gscholar-title-translator/issues)或者[PR](https://github.com/pboymt/gscholar-title-translator/pulls)。
+
 ## 使用的翻译服务
 
 > 目前只使用了有道翻译，如果有更好的翻译服务，请提交[issue](https://github.com/pboymt/gscholar-title-translator/issues)或者[PR](https://github.com/pboymt/gscholar-title-translator/pulls)。

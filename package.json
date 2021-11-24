@@ -1,6 +1,6 @@
 {
   "name": "gscholar-title-translator",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Translate your Google Scholar search result's title to the language you selected.",
   "main": "userscript/index.js",
   "scripts": {
@@ -40,7 +40,9 @@
     "namespace": "http://tampermonkey.net/",
     "license": "http://www.gnu.org/licenses/gpl-3.0.txt",
     "match": [
-      "http*://scholar.google.com/scholar*"
+      "https://scholar.google.com/scholar*",
+      "https://scholar.google.com.hk/scholar*",
+      "https://scholar.ustc.cf/scholar*"
     ],
     "connect": [
       "youdao.com"
