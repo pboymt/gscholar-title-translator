@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name 谷歌学术标题翻译
 // @namespace http://tampermonkey.net/
-// @version 0.2.0
+// @version 0.2.1
 // @description 将谷歌学术搜索结果中的标题翻译为中文
 // @author pboymt
 // @match http*://scholar.google.com/scholar*
@@ -29,27 +29,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const youdao_1 = __webpack_require__(1);
-function insertCSS() {
-    const style = `
-      h3.gs_rt{
-        font-size: 14px;
-      }
-      h3.gtitle_translated{
-        font-size: 18px
-      }
-    `;
-    GM_addStyle(style);
-}
+const css_1 = __webpack_require__(1);
+const youdao_1 = __webpack_require__(2);
 function main() {
     var _a, _b, _c, _d, _e;
     return __awaiter(this, void 0, void 0, function* () {
-        insertCSS();
-        const list = document.querySelectorAll('h3.gs_rt');
+        (0, css_1.insertCSS)();
+        const list = document.querySelectorAll("h3.gs_rt");
         for (let i = 0; i < list.length; i++) {
             const ele = list.item(i);
-            let oriTitle = ((_a = ele.textContent) !== null && _a !== void 0 ? _a : '').trim();
-            let tagElement = ele.querySelector('span.gs_ctc,span.gs_ctu');
+            let oriTitle = ((_a = ele.textContent) !== null && _a !== void 0 ? _a : "").trim();
+            let tagElement = ele.querySelector("span.gs_ctc,span.gs_ctu");
             console.debug(tagElement);
             let tag = undefined;
             let fullTag = undefined;
@@ -57,9 +47,9 @@ function main() {
                 fullTag = (_b = tagElement.textContent) === null || _b === void 0 ? void 0 : _b.trim();
                 tag = (_d = (_c = tagElement.firstElementChild) === null || _c === void 0 ? void 0 : _c.textContent) === null || _d === void 0 ? void 0 : _d.trim();
                 if (fullTag)
-                    oriTitle = oriTitle.replace(fullTag, '').trim();
+                    oriTitle = oriTitle.replace(fullTag, "").trim();
             }
-            const urlEle = ele.querySelector('a');
+            const urlEle = ele.querySelector("a");
             let url = undefined;
             if (urlEle) {
                 url = urlEle.href;
@@ -72,9 +62,9 @@ function main() {
                 if (tag) {
                     transTitle = `${tag} ${transTitle}`;
                 }
-                const nele = document.createElement('h3');
+                const nele = document.createElement("h3");
                 if (url) {
-                    const a = document.createElement('a');
+                    const a = document.createElement("a");
                     a.href = url;
                     a.append(document.createTextNode(transTitle));
                     nele.appendChild(a);
@@ -82,11 +72,11 @@ function main() {
                 else {
                     nele.appendChild(document.createTextNode(transTitle));
                 }
-                nele.classList.add('gtitle_translated');
+                nele.classList.add("gtitle_translated");
                 (_e = ele.parentNode) === null || _e === void 0 ? void 0 : _e.insertBefore(nele, ele);
             }
             catch (error) {
-                console.log('翻译错误');
+                console.log("翻译错误");
                 console.log(error);
             }
             yield sleep(100 + Math.random() * 100);
@@ -94,7 +84,7 @@ function main() {
     });
 }
 function sleep(duration) {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
         setTimeout(resolve, duration);
     });
 }
@@ -103,6 +93,27 @@ main();
 
 /***/ }),
 /* 1 */
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.insertCSS = void 0;
+function insertCSS() {
+    const style = `
+      h3.gs_rt{
+        font-size: 14px;
+      }
+      h3.gtitle_translated{
+        font-size: 18px
+      }
+    `;
+    GM_addStyle(style);
+}
+exports.insertCSS = insertCSS;
+
+
+/***/ }),
+/* 2 */
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -120,8 +131,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.translate_youdao_next = void 0;
-const axios_1 = __importDefault(__webpack_require__(2));
-const axios_userscript_adapter_1 = __importDefault(__webpack_require__(3));
+const axios_1 = __importDefault(__webpack_require__(3));
+const axios_userscript_adapter_1 = __importDefault(__webpack_require__(4));
 axios_1.default.defaults.adapter = axios_userscript_adapter_1.default;
 function translate_youdao_next(text) {
     var _a;
@@ -140,30 +151,30 @@ exports.translate_youdao_next = translate_youdao_next;
 
 
 /***/ }),
-/* 2 */
+/* 3 */
 /***/ ((module) => {
 
 module.exports = axios;
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ xhrAdapter)
 /* harmony export */ });
-/* harmony import */ var axios_lib_core_buildFullPath__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(4);
+/* harmony import */ var axios_lib_core_buildFullPath__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(5);
 /* harmony import */ var axios_lib_core_buildFullPath__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios_lib_core_buildFullPath__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var axios_lib_core_createError__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
+/* harmony import */ var axios_lib_core_createError__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(8);
 /* harmony import */ var axios_lib_core_createError__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios_lib_core_createError__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var axios_lib_core_settle__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(9);
+/* harmony import */ var axios_lib_core_settle__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(10);
 /* harmony import */ var axios_lib_core_settle__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios_lib_core_settle__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var axios_lib_helpers_buildURL__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(10);
+/* harmony import */ var axios_lib_helpers_buildURL__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(11);
 /* harmony import */ var axios_lib_helpers_buildURL__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios_lib_helpers_buildURL__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var axios_lib_helpers_parseHeaders__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(13);
+/* harmony import */ var axios_lib_helpers_parseHeaders__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(14);
 /* harmony import */ var axios_lib_helpers_parseHeaders__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(axios_lib_helpers_parseHeaders__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var axios_lib_utils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(11);
+/* harmony import */ var axios_lib_utils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(12);
 /* harmony import */ var axios_lib_utils__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(axios_lib_utils__WEBPACK_IMPORTED_MODULE_5__);
 
 
@@ -173,88 +184,109 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function xhrAdapter(config) {
-    return new Promise((resolve, reject) => {
-        let requestData = config.data;
-        const requestHeaders = config.headers ?? {};
-        if (axios_lib_utils__WEBPACK_IMPORTED_MODULE_5___default().isFormData(requestData)) {
-            delete requestHeaders["Content-Type"]; // Let the browser set it
-        }
-        // HTTP basic authentication
-        if (config.auth) {
-            const username = config.auth.username || "";
-            const password = config.auth.password || "";
-            requestHeaders.Authorization = "Basic " + btoa(username + ":" + password);
-        }
-        // Handle low level network errors
-        const onerror = function handleError() {
-            // Real errors are hidden from us by the browser
-            // onerror should only fire if it's a network error
-            reject(axios_lib_core_createError__WEBPACK_IMPORTED_MODULE_1___default()("Network Error", config));
-        };
-        // Handle timeout
-        const ontimeout = function handleTimeout() {
-            reject(axios_lib_core_createError__WEBPACK_IMPORTED_MODULE_1___default()("timeout of " + config.timeout + "ms exceeded", config, "ECONNABORTED"));
-        };
+  return new Promise((resolve, reject) => {
+    let requestData = config.data;
+    const requestHeaders = config.headers ?? {};
+    if (axios_lib_utils__WEBPACK_IMPORTED_MODULE_5___default().isFormData(requestData)) {
+      delete requestHeaders["Content-Type"]; // Let the browser set it
+    }
+    // HTTP basic authentication
+    if (config.auth) {
+      const username = config.auth.username || "";
+      const password = config.auth.password || "";
+      requestHeaders.Authorization = "Basic " + btoa(username + ":" + password);
+    }
+    // Handle low level network errors
+    const onerror = function handleError() {
+      // Real errors are hidden from us by the browser
+      // onerror should only fire if it's a network error
+      reject(axios_lib_core_createError__WEBPACK_IMPORTED_MODULE_1___default()("Network Error", config));
+    };
+    // Handle timeout
+    const ontimeout = function handleTimeout() {
+      reject(
+        axios_lib_core_createError__WEBPACK_IMPORTED_MODULE_1___default()(
+          "timeout of " + config.timeout + "ms exceeded",
+          config,
+          "ECONNABORTED"
+        )
+      );
+    };
+    // Remove Content-Type if data is undefined
+    axios_lib_utils__WEBPACK_IMPORTED_MODULE_5___default().forEach(requestHeaders, function setRequestHeader(val, key) {
+      if (
+        typeof requestData === "undefined" &&
+        key.toLowerCase() === "content-type"
+      ) {
         // Remove Content-Type if data is undefined
-        axios_lib_utils__WEBPACK_IMPORTED_MODULE_5___default().forEach(requestHeaders, function setRequestHeader(val, key) {
-            if (typeof requestData === "undefined" && key.toLowerCase() === "content-type") {
-                // Remove Content-Type if data is undefined
-                delete requestHeaders[key];
-            }
-        });
-        // Add withCredentials to request if needed
-        // if (config.withCredentials) {
-        //   request.withCredentials = true
-        // }
-        if (requestData === undefined) {
-            requestData = null;
-        }
-        // Send the request
-        // Listen for ready state
-        const onload = function handleLoad(resp) {
-            // Prepare the response
-            const responseHeaders = "responseHeaders" in resp ? axios_lib_helpers_parseHeaders__WEBPACK_IMPORTED_MODULE_4___default()(resp.responseHeaders) : {};
-            const responseData = !config.responseType || config.responseType === "text" ? resp.responseText : resp.response;
-            const response = {
-                data: responseData,
-                status: resp.status,
-                statusText: resp.statusText,
-                headers: responseHeaders,
-                config: config,
-                request: {
-                    // can't got real XMLHttpRequest object, only some property is available
-                    responseURL: resp.finalUrl,
-                    status: resp.status,
-                    statusText: resp.statusText,
-                    responseXML: null,
-                },
-            };
-            axios_lib_core_settle__WEBPACK_IMPORTED_MODULE_2___default()(resolve, reject, response);
-        };
-        if (config.cancelToken) {
-            // Handle cancellation
-            config.cancelToken.promise.then(function onCanceled(cancel) {
-                reject(cancel);
-                // Clean up request
-            });
-        }
-        const method = config.method.toUpperCase();
-        if (method === "UNLINK" || method === "PURGE" || method === "LINK") {
-            reject(axios_lib_core_createError__WEBPACK_IMPORTED_MODULE_1___default()(`${method} is not a supported method by GM.xmlHttpRequest`, config));
-        }
-        else {
-            GM.xmlHttpRequest({
-                method,
-                url: axios_lib_helpers_buildURL__WEBPACK_IMPORTED_MODULE_3___default()(axios_lib_core_buildFullPath__WEBPACK_IMPORTED_MODULE_0___default()(config.baseURL, config.url), config.params, config.paramsSerializer),
-                headers: requestHeaders,
-                data: requestData,
-                timeout: config.timeout,
-                ontimeout,
-                onload,
-                onerror,
-            });
-        }
+        delete requestHeaders[key];
+      }
     });
+    // Add withCredentials to request if needed
+    // if (config.withCredentials) {
+    //   request.withCredentials = true
+    // }
+    if (requestData === undefined) {
+      requestData = null;
+    }
+    // Send the request
+    // Listen for ready state
+    const onload = function handleLoad(resp) {
+      // Prepare the response
+      const responseHeaders =
+        "responseHeaders" in resp ? axios_lib_helpers_parseHeaders__WEBPACK_IMPORTED_MODULE_4___default()(resp.responseHeaders) : {};
+      const responseData =
+        !config.responseType || config.responseType === "text"
+          ? resp.responseText
+          : resp.response;
+      const response = {
+        data: responseData,
+        status: resp.status,
+        statusText: resp.statusText,
+        headers: responseHeaders,
+        config: config,
+        request: {
+          // can't got real XMLHttpRequest object, only some property is available
+          responseURL: resp.finalUrl,
+          status: resp.status,
+          statusText: resp.statusText,
+          responseXML: null,
+        },
+      };
+      axios_lib_core_settle__WEBPACK_IMPORTED_MODULE_2___default()(resolve, reject, response);
+    };
+    if (config.cancelToken) {
+      // Handle cancellation
+      config.cancelToken.promise.then(function onCanceled(cancel) {
+        reject(cancel);
+        // Clean up request
+      });
+    }
+    const method = config.method.toUpperCase();
+    if (method === "UNLINK" || method === "PURGE" || method === "LINK") {
+      reject(
+        axios_lib_core_createError__WEBPACK_IMPORTED_MODULE_1___default()(
+          `${method} is not a supported method by GM.xmlHttpRequest`,
+          config
+        )
+      );
+    } else {
+      GM.xmlHttpRequest({
+        method,
+        url: axios_lib_helpers_buildURL__WEBPACK_IMPORTED_MODULE_3___default()(
+          axios_lib_core_buildFullPath__WEBPACK_IMPORTED_MODULE_0___default()(config.baseURL, config.url),
+          config.params,
+          config.paramsSerializer
+        ),
+        headers: requestHeaders,
+        data: requestData,
+        timeout: config.timeout,
+        ontimeout,
+        onload,
+        onerror,
+      });
+    }
+  });
 }
 
 
@@ -262,13 +294,13 @@ function xhrAdapter(config) {
 
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 
 
-var isAbsoluteURL = __webpack_require__(5);
-var combineURLs = __webpack_require__(6);
+var isAbsoluteURL = __webpack_require__(6);
+var combineURLs = __webpack_require__(7);
 
 /**
  * Creates a new URL by combining the baseURL with the requestedURL,
@@ -288,7 +320,7 @@ module.exports = function buildFullPath(baseURL, requestedURL) {
 
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ ((module) => {
 
 
@@ -308,7 +340,7 @@ module.exports = function isAbsoluteURL(url) {
 
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ ((module) => {
 
 
@@ -322,18 +354,18 @@ module.exports = function isAbsoluteURL(url) {
  */
 module.exports = function combineURLs(baseURL, relativeURL) {
   return relativeURL
-    ? baseURL.replace(/\/+$/, '') + '/' + relativeURL.replace(/^\/+/, '')
+    ? baseURL.replace(/\/+$/, "") + "/" + relativeURL.replace(/^\/+/, "")
     : baseURL;
 };
 
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 
 
-var enhanceError = __webpack_require__(8);
+var enhanceError = __webpack_require__(9);
 
 /**
  * Create an Error with the specified message, config, error code, request and response.
@@ -345,14 +377,20 @@ var enhanceError = __webpack_require__(8);
  * @param {Object} [response] The response.
  * @returns {Error} The created error.
  */
-module.exports = function createError(message, config, code, request, response) {
+module.exports = function createError(
+  message,
+  config,
+  code,
+  request,
+  response
+) {
   var error = new Error(message);
   return enhanceError(error, config, code, request, response);
 };
 
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ ((module) => {
 
 
@@ -393,7 +431,8 @@ module.exports = function enhanceError(error, config, code, request, response) {
       // Axios
       config: this.config,
       code: this.code,
-      status: this.response && this.response.status ? this.response.status : null
+      status:
+        this.response && this.response.status ? this.response.status : null,
     };
   };
   return error;
@@ -401,12 +440,12 @@ module.exports = function enhanceError(error, config, code, request, response) {
 
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 
 
-var createError = __webpack_require__(7);
+var createError = __webpack_require__(8);
 
 /**
  * Resolve or reject a Promise based on response status.
@@ -420,33 +459,35 @@ module.exports = function settle(resolve, reject, response) {
   if (!response.status || !validateStatus || validateStatus(response.status)) {
     resolve(response);
   } else {
-    reject(createError(
-      'Request failed with status code ' + response.status,
-      response.config,
-      null,
-      response.request,
-      response
-    ));
+    reject(
+      createError(
+        "Request failed with status code " + response.status,
+        response.config,
+        null,
+        response.request,
+        response
+      )
+    );
   }
 };
 
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 
 
-var utils = __webpack_require__(11);
+var utils = __webpack_require__(12);
 
 function encode(val) {
-  return encodeURIComponent(val).
-    replace(/%3A/gi, ':').
-    replace(/%24/g, '$').
-    replace(/%2C/gi, ',').
-    replace(/%20/g, '+').
-    replace(/%5B/gi, '[').
-    replace(/%5D/gi, ']');
+  return encodeURIComponent(val)
+    .replace(/%3A/gi, ":")
+    .replace(/%24/g, "$")
+    .replace(/%2C/gi, ",")
+    .replace(/%20/g, "+")
+    .replace(/%5B/gi, "[")
+    .replace(/%5D/gi, "]");
 }
 
 /**
@@ -471,12 +512,12 @@ module.exports = function buildURL(url, params, paramsSerializer) {
     var parts = [];
 
     utils.forEach(params, function serialize(val, key) {
-      if (val === null || typeof val === 'undefined') {
+      if (val === null || typeof val === "undefined") {
         return;
       }
 
       if (utils.isArray(val)) {
-        key = key + '[]';
+        key = key + "[]";
       } else {
         val = [val];
       }
@@ -487,20 +528,20 @@ module.exports = function buildURL(url, params, paramsSerializer) {
         } else if (utils.isObject(v)) {
           v = JSON.stringify(v);
         }
-        parts.push(encode(key) + '=' + encode(v));
+        parts.push(encode(key) + "=" + encode(v));
       });
     });
 
-    serializedParams = parts.join('&');
+    serializedParams = parts.join("&");
   }
 
   if (serializedParams) {
-    var hashmarkIndex = url.indexOf('#');
+    var hashmarkIndex = url.indexOf("#");
     if (hashmarkIndex !== -1) {
       url = url.slice(0, hashmarkIndex);
     }
 
-    url += (url.indexOf('?') === -1 ? '?' : '&') + serializedParams;
+    url += (url.indexOf("?") === -1 ? "?" : "&") + serializedParams;
   }
 
   return url;
@@ -508,12 +549,12 @@ module.exports = function buildURL(url, params, paramsSerializer) {
 
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 
 
-var bind = __webpack_require__(12);
+var bind = __webpack_require__(13);
 
 // utils is a library of generic helper functions non-specific to axios
 
@@ -526,7 +567,7 @@ var toString = Object.prototype.toString;
  * @returns {boolean} True if value is an Array, otherwise false
  */
 function isArray(val) {
-  return toString.call(val) === '[object Array]';
+  return toString.call(val) === "[object Array]";
 }
 
 /**
@@ -536,7 +577,7 @@ function isArray(val) {
  * @returns {boolean} True if the value is undefined, otherwise false
  */
 function isUndefined(val) {
-  return typeof val === 'undefined';
+  return typeof val === "undefined";
 }
 
 /**
@@ -546,8 +587,14 @@ function isUndefined(val) {
  * @returns {boolean} True if value is a Buffer, otherwise false
  */
 function isBuffer(val) {
-  return val !== null && !isUndefined(val) && val.constructor !== null && !isUndefined(val.constructor)
-    && typeof val.constructor.isBuffer === 'function' && val.constructor.isBuffer(val);
+  return (
+    val !== null &&
+    !isUndefined(val) &&
+    val.constructor !== null &&
+    !isUndefined(val.constructor) &&
+    typeof val.constructor.isBuffer === "function" &&
+    val.constructor.isBuffer(val)
+  );
 }
 
 /**
@@ -557,7 +604,7 @@ function isBuffer(val) {
  * @returns {boolean} True if value is an ArrayBuffer, otherwise false
  */
 function isArrayBuffer(val) {
-  return toString.call(val) === '[object ArrayBuffer]';
+  return toString.call(val) === "[object ArrayBuffer]";
 }
 
 /**
@@ -567,7 +614,7 @@ function isArrayBuffer(val) {
  * @returns {boolean} True if value is an FormData, otherwise false
  */
 function isFormData(val) {
-  return (typeof FormData !== 'undefined') && (val instanceof FormData);
+  return typeof FormData !== "undefined" && val instanceof FormData;
 }
 
 /**
@@ -578,10 +625,10 @@ function isFormData(val) {
  */
 function isArrayBufferView(val) {
   var result;
-  if ((typeof ArrayBuffer !== 'undefined') && (ArrayBuffer.isView)) {
+  if (typeof ArrayBuffer !== "undefined" && ArrayBuffer.isView) {
     result = ArrayBuffer.isView(val);
   } else {
-    result = (val) && (val.buffer) && (val.buffer instanceof ArrayBuffer);
+    result = val && val.buffer && val.buffer instanceof ArrayBuffer;
   }
   return result;
 }
@@ -593,7 +640,7 @@ function isArrayBufferView(val) {
  * @returns {boolean} True if value is a String, otherwise false
  */
 function isString(val) {
-  return typeof val === 'string';
+  return typeof val === "string";
 }
 
 /**
@@ -603,7 +650,7 @@ function isString(val) {
  * @returns {boolean} True if value is a Number, otherwise false
  */
 function isNumber(val) {
-  return typeof val === 'number';
+  return typeof val === "number";
 }
 
 /**
@@ -613,7 +660,7 @@ function isNumber(val) {
  * @returns {boolean} True if value is an Object, otherwise false
  */
 function isObject(val) {
-  return val !== null && typeof val === 'object';
+  return val !== null && typeof val === "object";
 }
 
 /**
@@ -623,7 +670,7 @@ function isObject(val) {
  * @return {boolean} True if value is a plain Object, otherwise false
  */
 function isPlainObject(val) {
-  if (toString.call(val) !== '[object Object]') {
+  if (toString.call(val) !== "[object Object]") {
     return false;
   }
 
@@ -638,7 +685,7 @@ function isPlainObject(val) {
  * @returns {boolean} True if value is a Date, otherwise false
  */
 function isDate(val) {
-  return toString.call(val) === '[object Date]';
+  return toString.call(val) === "[object Date]";
 }
 
 /**
@@ -648,7 +695,7 @@ function isDate(val) {
  * @returns {boolean} True if value is a File, otherwise false
  */
 function isFile(val) {
-  return toString.call(val) === '[object File]';
+  return toString.call(val) === "[object File]";
 }
 
 /**
@@ -658,7 +705,7 @@ function isFile(val) {
  * @returns {boolean} True if value is a Blob, otherwise false
  */
 function isBlob(val) {
-  return toString.call(val) === '[object Blob]';
+  return toString.call(val) === "[object Blob]";
 }
 
 /**
@@ -668,7 +715,7 @@ function isBlob(val) {
  * @returns {boolean} True if value is a Function, otherwise false
  */
 function isFunction(val) {
-  return toString.call(val) === '[object Function]';
+  return toString.call(val) === "[object Function]";
 }
 
 /**
@@ -688,7 +735,9 @@ function isStream(val) {
  * @returns {boolean} True if value is a URLSearchParams object, otherwise false
  */
 function isURLSearchParams(val) {
-  return typeof URLSearchParams !== 'undefined' && val instanceof URLSearchParams;
+  return (
+    typeof URLSearchParams !== "undefined" && val instanceof URLSearchParams
+  );
 }
 
 /**
@@ -698,7 +747,7 @@ function isURLSearchParams(val) {
  * @returns {String} The String freed of excess whitespace
  */
 function trim(str) {
-  return str.trim ? str.trim() : str.replace(/^\s+|\s+$/g, '');
+  return str.trim ? str.trim() : str.replace(/^\s+|\s+$/g, "");
 }
 
 /**
@@ -717,15 +766,15 @@ function trim(str) {
  *  navigator.product -> 'NativeScript' or 'NS'
  */
 function isStandardBrowserEnv() {
-  if (typeof navigator !== 'undefined' && (navigator.product === 'ReactNative' ||
-                                           navigator.product === 'NativeScript' ||
-                                           navigator.product === 'NS')) {
+  if (
+    typeof navigator !== "undefined" &&
+    (navigator.product === "ReactNative" ||
+      navigator.product === "NativeScript" ||
+      navigator.product === "NS")
+  ) {
     return false;
   }
-  return (
-    typeof window !== 'undefined' &&
-    typeof document !== 'undefined'
-  );
+  return typeof window !== "undefined" && typeof document !== "undefined";
 }
 
 /**
@@ -742,12 +791,12 @@ function isStandardBrowserEnv() {
  */
 function forEach(obj, fn) {
   // Don't bother if no value provided
-  if (obj === null || typeof obj === 'undefined') {
+  if (obj === null || typeof obj === "undefined") {
     return;
   }
 
   // Force an array if not already something iterable
-  if (typeof obj !== 'object') {
+  if (typeof obj !== "object") {
     /*eslint no-param-reassign:0*/
     obj = [obj];
   }
@@ -814,7 +863,7 @@ function merge(/* obj1, obj2, obj3, ... */) {
  */
 function extend(a, b, thisArg) {
   forEach(b, function assignValue(val, key) {
-    if (thisArg && typeof val === 'function') {
+    if (thisArg && typeof val === "function") {
       a[key] = bind(val, thisArg);
     } else {
       a[key] = val;
@@ -830,7 +879,7 @@ function extend(a, b, thisArg) {
  * @return {string} content value without BOM
  */
 function stripBOM(content) {
-  if (content.charCodeAt(0) === 0xFEFF) {
+  if (content.charCodeAt(0) === 0xfeff) {
     content = content.slice(1);
   }
   return content;
@@ -858,12 +907,12 @@ module.exports = {
   merge: merge,
   extend: extend,
   trim: trim,
-  stripBOM: stripBOM
+  stripBOM: stripBOM,
 };
 
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ ((module) => {
 
 
@@ -880,20 +929,33 @@ module.exports = function bind(fn, thisArg) {
 
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 
 
-var utils = __webpack_require__(11);
+var utils = __webpack_require__(12);
 
 // Headers whose duplicates are ignored by node
 // c.f. https://nodejs.org/api/http.html#http_message_headers
 var ignoreDuplicateOf = [
-  'age', 'authorization', 'content-length', 'content-type', 'etag',
-  'expires', 'from', 'host', 'if-modified-since', 'if-unmodified-since',
-  'last-modified', 'location', 'max-forwards', 'proxy-authorization',
-  'referer', 'retry-after', 'user-agent'
+  "age",
+  "authorization",
+  "content-length",
+  "content-type",
+  "etag",
+  "expires",
+  "from",
+  "host",
+  "if-modified-since",
+  "if-unmodified-since",
+  "last-modified",
+  "location",
+  "max-forwards",
+  "proxy-authorization",
+  "referer",
+  "retry-after",
+  "user-agent",
 ];
 
 /**
@@ -915,10 +977,12 @@ module.exports = function parseHeaders(headers) {
   var val;
   var i;
 
-  if (!headers) { return parsed; }
+  if (!headers) {
+    return parsed;
+  }
 
-  utils.forEach(headers.split('\n'), function parser(line) {
-    i = line.indexOf(':');
+  utils.forEach(headers.split("\n"), function parser(line) {
+    i = line.indexOf(":");
     key = utils.trim(line.substr(0, i)).toLowerCase();
     val = utils.trim(line.substr(i + 1));
 
@@ -926,10 +990,10 @@ module.exports = function parseHeaders(headers) {
       if (parsed[key] && ignoreDuplicateOf.indexOf(key) >= 0) {
         return;
       }
-      if (key === 'set-cookie') {
+      if (key === "set-cookie") {
         parsed[key] = (parsed[key] ? parsed[key] : []).concat([val]);
       } else {
-        parsed[key] = parsed[key] ? parsed[key] + ', ' + val : val;
+        parsed[key] = parsed[key] ? parsed[key] + ", " + val : val;
       }
     }
   });

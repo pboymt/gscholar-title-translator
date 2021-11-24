@@ -2,6 +2,7 @@ import path from 'path';
 import { Configuration, BannerPlugin } from 'webpack';
 import TerserPlugin from "terser-webpack-plugin";
 import { generateHeader } from './plugins/userscript.plugin';
+import PrettierPlugin from './plugins/prettier.plugin';
 
 const config: Configuration = {
     mode: 'none',
@@ -28,10 +29,13 @@ const config: Configuration = {
     optimization: {
         minimize: false,
         minimizer: [new TerserPlugin({
+            // minify: TerserPlugin.swcMinify,
             terserOptions: {
                 format: {
                     comments: false,
-                }
+                },
+                compress: false,
+                mangle: false,
             },
             extractComments: false,
         })],

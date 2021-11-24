@@ -22,9 +22,12 @@
     "axios": "^0.24.0"
   },
   "devDependencies": {
+    "@swc/core": "^1.2.112",
     "@types/node": "^16.11.10",
+    "@types/prettier": "^2.4.2",
     "@types/webpack": "^5.28.0",
     "axios-userscript-adapter": "^0.1.8",
+    "prettier": "^2.4.1",
     "terser-webpack-plugin": "^5.2.5",
     "ts-loader": "^9.2.6",
     "ts-node": "^10.4.0",
