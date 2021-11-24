@@ -1,5 +1,6 @@
 import path from 'path';
 import { Configuration, BannerPlugin } from 'webpack';
+import TerserPlugin from "terser-webpack-plugin";
 import { generateHeader } from './plugins/userscript.plugin';
 
 const config: Configuration = {
@@ -24,6 +25,17 @@ const config: Configuration = {
     externals: {
         axios: 'axios',
         'axios-userscript-adapter': 'axiosGmxhrAdapter'
+    },
+    optimization: {
+        minimize: false,
+        minimizer: [new TerserPlugin({
+            terserOptions: {
+                format: {
+                    comments: false,
+                }
+            },
+            extractComments: false,
+        })],
     },
     plugins: [
         new BannerPlugin({

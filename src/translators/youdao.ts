@@ -1,4 +1,4 @@
-import { ajax } from "../utils/ajax";
+// import { ajax } from "../utils/ajax";
 import axios from "axios";
 import adapter from "axios-userscript-adapter";
 
@@ -10,16 +10,16 @@ interface TranslateResultYouDao {
     }
 }
 
-export function translate_youdao(text: string): Promise<string | undefined> {
-    let url = `https://dict.youdao.com/jsonapi?xmlVersion=5.1&jsonversion=2&q=${encodeURIComponent(text)}`;
-    return new Promise((resolve, reject) => {
-        ajax(url, (rst) => {
-            resolve(JSON.parse(rst)?.fanyi?.tran);
-        }, (err) => {
-            reject(err);
-        });
-    });
-}
+// export function translate_youdao(text: string): Promise<string | undefined> {
+//     let url = `https://dict.youdao.com/jsonapi?xmlVersion=5.1&jsonversion=2&q=${encodeURIComponent(text)}`;
+//     return new Promise((resolve, reject) => {
+//         ajax(url, (rst) => {
+//             resolve(JSON.parse(rst)?.fanyi?.tran);
+//         }, (err) => {
+//             reject(err);
+//         });
+//     });
+// }
 
 
 export async function translate_youdao_next(text: string): Promise<string | undefined> {
