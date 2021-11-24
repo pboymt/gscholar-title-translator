@@ -1,0 +1,49 @@
+{
+  "name": "gscholar-title-translator",
+  "version": "0.2.0",
+  "description": "Translate your Google Scholar search result's title to the language you selected.",
+  "main": "userscript/index.js",
+  "scripts": {
+    "test": "eslint .",
+    "build": "webpack --config webpack.config.ts"
+  },
+  "keywords": [
+    "\"google",
+    "scholar\"",
+    "traslate"
+  ],
+  "author": "pboymt",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "axios": "^0.24.0"
+  },
+  "devDependencies": {
+    "@types/node": "^16.11.10",
+    "@types/webpack": "^5.28.0",
+    "ts-loader": "^9.2.6",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.5.2",
+    "webpack-cli": "^4.9.1",
+    "axios-userscript-adapter": "^0.1.8"
+  },
+  "userscript": {
+    "name": "谷歌学术标题翻译",
+    "description": "将谷歌学术搜索结果中的标题翻译为中文",
+    "namespace": "http://tampermonkey.net/",
+    "license": "http://www.gnu.org/licenses/gpl-3.0.txt",
+    "match": [
+      "http*://scholar.google.com/scholar*"
+    ],
+    "connect": [
+      "youdao.com"
+    ],
+    "require":[
+      "https://cdn.jsdelivr.net/npm/axios-userscript-adapter@~0.1.8/dist/axiosGmxhrAdapter.min.js"
+    ],
+    "grant": [
+      "GM_xmlhttpRequest",
+      "GM_addStyle",
+      "GM.xmlHttpRequest"
+    ]
+  }
+}
