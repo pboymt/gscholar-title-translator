@@ -5,11 +5,11 @@ import { generateHeader } from './plugins/userscript.plugin';
 import PrettierPlugin from './plugins/prettier.plugin';
 
 const config: Configuration = {
-    mode: 'none',
+    mode: 'development',
     entry: path.join(__dirname, 'src/index.ts'),
     output: {
         path: path.join(__dirname, 'userscript'),
-        filename: 'gscholar-title-translator.js',
+        filename: 'gscholar-title-translator.user.js',
     },
     resolve: {
         extensions: ['.ts', '.js']
@@ -24,7 +24,7 @@ const config: Configuration = {
         ]
     },
     externals: {
-        axios: 'axios'
+        axios: 'axios',
     },
     optimization: {
         minimize: false,
