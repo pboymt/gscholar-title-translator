@@ -1,39 +1,48 @@
 import { insertCSS } from "./utils/css";
 import { translate_youdao_next } from "./translators/youdao";
+import { add_pref_button } from "./prefs/pref";
+import { createVueApp } from "./prefs/ui";
+
+const TAG_REGEX = /^(?<tag>\[.+\])\s*/;
 
 async function main(): Promise<void> {
 
+  // const pref = createVueApp();
+  
+  // add_pref_button(pref);
+
   insertCSS();
 
-  const list = document.querySelectorAll("h3.gs_rt");
+  const list = document.querySelectorAll<HTMLHeadingElement>("h3.gs_rt");
 
   for (let i = 0; i < list.length; i++) {
 
+    console.debug("main", i, list[i].innerText);
+
+    // 获取元素
     const ele = list.item(i);
-    let oriTitle = (ele.textContent ?? "").trim();
-    let tagElement = ele.querySelector("span.gs_ctc,span.gs_ctu");
-    console.debug(tagElement);
-    let tag: string | undefined = undefined;
-    let fullTag: string | undefined = undefined;
-
-    if (tagElement) {
-      fullTag = tagElement.textContent?.trim();
-      tag = tagElement.firstElementChild?.textContent?.trim();
-      if (fullTag) oriTitle = oriTitle.replace(fullTag, "").trim();
+    // 获取标题
+    const raw_title = (ele.innerText ?? "").trim();
+    // 获取标签
+    const tag_match = raw_title.match(TAG_REGEX);
+    let tag: string | undefined;
+    if (tag_match && tag_match.groups && tag_match.groups.tag) {
+      tag = tag_match.groups.tag;
     }
+    const title = raw_title.replace(TAG_REGEX, "");
 
-    const urlEle = ele.querySelector("a");
+    const url_element = ele.querySelector("a");
     let url: string | undefined = undefined;
 
-    if (urlEle) {
-      url = urlEle.href;
+    if (url_element) {
+      url = url_element.href;
     }
 
     try {
 
-      const res = await translate_youdao_next(oriTitle);
+      const res = await translate_youdao_next(title);
 
-      if (!res) return;
+      if (!res) continue;
       let transTitle = res;
       if (tag) {
         transTitle = `${tag} ${transTitle}`;
@@ -55,12 +64,11 @@ async function main(): Promise<void> {
 
     } catch (error) {
 
-      console.log("翻译错误");
-      console.log(error);
+      console.debug("翻译错误", error);
 
     }
 
-    await sleep(100 + Math.random() * 100);
+    await sleep(100 + Math.random() * 300);
 
   }
 }
@@ -73,4 +81,4 @@ function sleep(duration: number) {
 
 }
 
-main();
+window.addEventListener('load', main);
